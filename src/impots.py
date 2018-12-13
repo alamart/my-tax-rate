@@ -1,9 +1,8 @@
-#!/usr/bin/env python 
-
 import matplotlib.pyplot as plt
 import sys, getopt
 import argparse
 
+__all__ = ['get_my_taxes']
 
 def calcul_by_tranche(somme, tranches=[], taux=[]):
 	tax = 0
@@ -32,13 +31,16 @@ def calcul_by_tranche(somme, tranches=[], taux=[]):
 					tax += tranche_somme * taux[3]
 					return tax, tax/somme
 
-def main(args):
+
+def get_my_taxes(args):
+	"""
+        Fonction pour afficher l'évolution de vos impots en fonction de votre salaire
+    """
 	try:
 		optlist, args = getopt.getopt(args, 'bprs')
 		optlist = dict(optlist)
 	except Exception as e:
 		raise e
-	print(optlist)
 
 	salary_rate = 1
 	denom = 1
@@ -93,4 +95,4 @@ if __name__ == "__main__":
 		parser.add_argument('-s', help='Get the true "NET" month salary you get after tax')
 		args=parser.parse_args()
 	else:
-		main(sys.argv[1:])
+		get_my_taxes(sys.argv[1:])
